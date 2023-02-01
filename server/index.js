@@ -1,30 +1,23 @@
-const express = require("express");
-
-// let mysql = require('mysql');
-
-// const db = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'Lital7699!!' , 
-//   database : 'todolist'
-// });
-
-const PORT = process.env.PORT || 3001;
+const express = require('express');
+const db = require('./Config/db');
+const cors = require('cors');
 
 const app = express();
+const PORT = 3001;
 
-// app.get("/api", (req, res) => {
-//   res.json({ message: "Hello from server!" });
-// });
+app.use(cors());
+app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`);
+// Route to get all posts
+app.get('/api/get', (req, res) => {
+  db.query('SELECT * FROM tasks', (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    res.send(result);
+  });
 });
 
-// connection.connect(function(err) {
-//   if (err) {
-//     return console.error('error: ' + err.message);
-//   }
-
-//   console.log('Connected to the MySQL server.');
-// });
+app.listen(PORT, () => {
+  console.log(`Server is running on ${PORT}`);
+});
