@@ -10,3 +10,4 @@ module.exports = class TasksService {
     );
   }
 };
+export default tasksService;
