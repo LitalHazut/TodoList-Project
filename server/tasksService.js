@@ -1,5 +1,5 @@
-// const db = require('./Config/db');
-import db from './Config/db';
+const db = require('./Config/db');
+// import db from './Config/db';
 
 module.exports = class TasksService {
   getAllTasks() {
@@ -11,4 +11,3 @@ module.exports = class TasksService {
     );
   }
 };
-export default TasksService;

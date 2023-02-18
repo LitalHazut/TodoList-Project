@@ -1,25 +1,25 @@
-// import TasksService from './tasksService';
-// import express from 'express';
-// import db from './Config/db';
-// import cors from 'cors';
+const TasksService = require('./tasksService.js');
+const express = require('express');
+const db = require('./Config/db.js');
+const cors = require('cors');
 
-// // const TasksService = require('./tasksService');
-// // const express = require('express');
-// // const db = require('./Config/db');
-// // const cors = require('cors');
+// const TasksService = require('./tasksService');
+// const express = require('express');
+// const db = require('./Config/db');
+// const cors = require('cors');
 
-// const app = express();
-// const PORT = 3001;
+const app = express();
+const PORT = 3001;
 
-// app.use(cors());
-// app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
-// const taskService = new TasksService();
+const taskService = new TasksService();
 
-// // Route to get all posts
-// app.get('/api/get', async (req, res) => {
-//   res.send({ tasks: await taskService.getAllTasks() });
-// });
+// Route to get all posts
+app.get('/api/get', async (req, res) => {
+  res.send({ tasks: await taskService.getAllTasks() });
+});
 
 // app.post('/api/post', (req, res) => {
 //   const name = req.body.name;
@@ -50,6 +50,6 @@
 //   );
 // });
 
-// app.listen(PORT, () => {
-//   console.log(`Server is running on ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`Server is running on ${PORT}`);
+});
