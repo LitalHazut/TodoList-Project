@@ -1,6 +1,6 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { TodoContextType, ITask } from '../types';
-
+import axios from 'axios';
 export const TodoContext = React.createContext<TodoContextType | null>(null);
 
 interface TodoContextProviderProps {
@@ -9,18 +9,18 @@ interface TodoContextProviderProps {
 export const TodoContextProvider = (props: TodoContextProviderProps) => {
   const [newTask, setNewTask] = React.useState('');
   const [updateData, setUpdateData] = React.useState<ITask | null>(null);
-  const [toDo, setToDo] = useState<ITask[]>([
-    {
-      id: 1,
-      name: 'Task1',
-      isCompleted: false,
-    },
-    {
-      id: 2,
-      name: 'Task2',
-      isCompleted: true,
-    },
-  ]);
+  const [toDo, setToDo] = useState<ITask[]>([]);
+
+  useEffect(() => {
+    axios
+      .get('/api/get')
+      .then((data) => {
+        setToDo(data.data.tasks);
+      })
+      .catch((e) => {
+        return e;
+      });
+  }, []);
 
   //Add task
   const addTask = () => {
@@ -29,7 +29,6 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       let newEntry = { id: num, name: newTask, isCompleted: false };
       setToDo([...toDo, newEntry]);
       setNewTask('');
-      console.log('addd');
     }
   };
 

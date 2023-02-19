@@ -15,7 +15,6 @@ const ToDo: React.FC<{
   setUpdateData: (t: ITask) => void;
   deleteTask: (id: number) => void;
 }> = ({ toDo, markDone, setUpdateData, deleteTask }) => {
-  // const { activeTasks } = useContext(TodoContext);
   return (
     <>
       {toDo &&
