@@ -22,6 +22,17 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       });
   }, []);
 
+  const addTaskToDb = (task: ITask) => {
+    axios
+      .post('/api/post', task)
+      .then((response) => {
+        console.log('Task added:', response.data);
+      })
+      .catch((error) => {
+        console.error('Error adding task:', error);
+      });
+  };
+
   //Add task
   const addTask = () => {
     if (newTask) {
@@ -30,6 +41,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       setToDo([...toDo, newEntry]);
       setNewTask('');
     }
+    addTaskToDb();
   };
 
   const markDone = (id: number) => {
