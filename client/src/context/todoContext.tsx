@@ -39,9 +39,9 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       let num = toDo.length + 1;
       let newEntry = { id: num, name: newTask, isCompleted: false };
       setToDo([...toDo, newEntry]);
+      addTaskToDb(newEntry);
       setNewTask('');
     }
-    addTaskToDb();
   };
 
   const markDone = (id: number) => {
