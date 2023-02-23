@@ -77,6 +77,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       return task;
     });
     UpdateTaskOnDb(t);
+    console.log(t.isCompleted)
     setToDo(newTask);
   };
 
