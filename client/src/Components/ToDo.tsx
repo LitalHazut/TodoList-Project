@@ -11,7 +11,7 @@ import { TodoContext } from '../context/todoContext';
 
 const ToDo: React.FC<{
   toDo: ITask[];
-  markDone: (id: number) => void;
+  markDone: (task: ITask) => void;
   setUpdateData: (t: ITask) => void;
   deleteTask: (id: number) => void;
 }> = ({ toDo, markDone, setUpdateData, deleteTask }) => {
@@ -32,7 +32,7 @@ const ToDo: React.FC<{
                   <div className='iconWrap'>
                     <span
                       title='Completed / Not Completed'
-                      onClick={(e) => markDone(task.id)}
+                      onClick={(e) => markDone(task)}
                     >
                       <FontAwesomeIcon icon={faCircleCheck} />
                     </span>

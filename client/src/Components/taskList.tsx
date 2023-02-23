@@ -11,7 +11,7 @@ import { TodoContext } from '../context/todoContext';
 
 type Props = {
   toDo: ITask[];
-  markDone: (id: number) => void;
+  markDone: (task: ITask) => void;
   deleteTask: (id: number) => void;
   setUpdateData: (t: ITask) => void;
 };
@@ -39,7 +39,7 @@ const TaskList: React.FC<Props> = ({
                   <div className='iconWrap'>
                     <span
                       title='Completed / Not Completed'
-                      onClick={() => markDone(task.id)}
+                      onClick={() => markDone(task)}
                     >
                       <FontAwesomeIcon icon={faCircleCheck} />
                     </span>

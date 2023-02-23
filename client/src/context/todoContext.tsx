@@ -69,13 +69,14 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
     }
   };
 
-  const markDone = (id: number) => {
+  const markDone = (t: ITask) => {
     let newTask = toDo.map((task) => {
-      if (task.id === id) {
+      if (task.id === t.id) {
         return { ...task, isCompleted: !task.isCompleted };
       }
       return task;
     });
+    UpdateTaskOnDb(t);
     setToDo(newTask);
   };
 

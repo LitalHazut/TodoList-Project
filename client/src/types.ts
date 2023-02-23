@@ -6,7 +6,7 @@ export interface ITask {
 export type TodoContextType = {
   toDo: ITask[];
   //TaskList
-  markDone: (id: number) => void;
+  markDone: (task: ITask) => void;
   deleteTask: (id: number) => void;
   setUpdateData: (t: ITask) => void;
 
