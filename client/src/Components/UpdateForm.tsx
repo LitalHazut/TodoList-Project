@@ -4,7 +4,7 @@ import { ITask } from '../types';
 type Props = {
   updateData: ITask;
   changeTask: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  updateTask: (id: number) => void;
+  updateTask: (task: ITask) => void;
   cancelUpdate: (s: string) => void;
 };
 
@@ -26,7 +26,7 @@ const UpdateForm: React.FC<Props> = ({
         </div>
         <div className='col-auto'>
           <button
-            onClick={() => updateTask(updateData.id)}
+            onClick={() => updateTask(updateData)}
             className='btn btn-lg btn-success mr-20 '
           >
             Update

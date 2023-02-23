@@ -18,6 +18,6 @@ export type TodoContextType = {
   // UpdateForm
   updateData: ITask | null;
   changeTask: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  updateTask: (id: number) => void;
+  updateTask: (task: ITask) => void;
   cancelUpdate: (s: string) => void;
 };

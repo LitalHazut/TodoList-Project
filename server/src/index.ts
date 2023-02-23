@@ -18,41 +18,21 @@ app.get('/api/get', async (req, res) => {
 
 app.post('/api/post', async (req, res) => {
   const name = req.body.name;
-  console.log(req.body.name);
-  debugger;
   const isCompleted = false;
-  debugger;
-  res.send({ tasks: await taskService.addTask(name, isCompleted) });
+  res.send({ tasks: await taskService.createTask(name, isCompleted) });
 });
 
-app.delete('/delete/:id', async (req, res) => {
-  var task = { id: req.params.id };
-  return new Promise((resolve, reject) =>
-  dbConnection.query(
-      'DELETE FROM tasks WHERE id = ' + req.params.id,
-      task,
-      (err, result) => {
-        if (err) reject(err);
-        else resolve(result);
-      }
-    )
-  );
+app.delete(`/api/delete/:id`, async (req, res) => {
+  console.log(req.params.id);
+  const id = parseInt(req.params.id as string);
+  res.send({ tasks: await taskService.deleteTask(id) });
 });
 
-// app.put('/put/:id', (req, resp) => {
-//   const data = [
-//     req.body.name,
-//     req.body.isCompleted,
-//   ];
-//   con.query(
-//     'UPDATE tasks SET name = ?, isCompleted = ?, WHERE id = ?',
-//     data,
-//     (error, results, fields) => {
-//       if (error) throw error;
-//       resp.send(results);
-//     }
-//   );
-// });
+app.put(`/api/put/:id`, async (req, res) => {
+  const data = [req.body.name, req.body.isCompleted, req.params.id];
+  console.log(data);
+  res.send({ tasks: await taskService.updateTask(data) });
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);

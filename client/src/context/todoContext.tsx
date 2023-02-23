@@ -22,14 +22,39 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       });
   }, []);
 
-  const addTaskToDb = (task: ITask) => {
+  const createTask = (task: ITask) => {
     axios
       .post('/api/post', task)
       .then((response) => {
-        console.log('Task added:', response.data);
+        console.log('Task created:', response.data);
       })
       .catch((error) => {
-        console.error('Error adding task:', error);
+        console.error('Error created task:', error);
+      });
+  };
+
+  const deleteTaskFromDb = (id: number) => {
+    axios
+      .delete(`/api/delete/${id}`)
+      .then((response) => {
+        console.log('Task deleted:', response.data);
+      })
+      .catch((error) => {
+        console.error('Error deleted task:', error);
+      });
+  };
+
+  const UpdateTaskOnDb = (task: ITask) => {
+    axios
+      .put(`/api/put/${task.id}`, {
+        name: task.name,
+        isCompleted: task.isCompleted,
+      })
+      .then((response) => {
+        console.log('Task updated:', response.data.tasks);
+      })
+      .catch((error) => {
+        console.error('Error updated task:', error);
       });
   };
 
@@ -39,7 +64,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       let num = toDo.length + 1;
       let newEntry = { id: num, name: newTask, isCompleted: false };
       setToDo([...toDo, newEntry]);
-      addTaskToDb(newEntry);
+      createTask(newEntry);
       setNewTask('');
     }
   };
@@ -58,6 +83,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
   const deleteTask = (id: number) => {
     let newTasks = toDo.filter((task) => task.id !== id);
     setToDo(newTasks);
+    deleteTaskFromDb(id);
   };
 
   // Cancel update
@@ -76,7 +102,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
     setUpdateData(task);
   };
 
-  const updateTask = (id: number) => {
+  const updateTask = (task: ITask) => {
     const updatedTasks = toDo.map((task) => {
       if (task.id === updateData?.id) {
         return {
@@ -88,8 +114,9 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
         return task;
       }
     });
-
     setToDo(updatedTasks);
+    UpdateTaskOnDb(task);
+    setUpdateData(null);
   };
 
   return (
