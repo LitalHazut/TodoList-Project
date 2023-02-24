@@ -69,16 +69,29 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
     }
   };
 
+  // const markDone = (t: ITask) => {
+  //   let newTask = toDo.map((task) => {
+  //     if (task.id === t.id) {
+  //       return { ...task, isCompleted: !task.isCompleted };
+  //     }
+  //     return task;
+  //   });
+  //   setToDo(newTask);
+  //   let taskById = newTask.find((task) => task.id === t.id)!;
+  //   UpdateTaskOnDb(taskById);
+  // };
+
   const markDone = (t: ITask) => {
+    const updatedTask = { ...t };
+    updatedTask.isCompleted = !updatedTask.isCompleted;
     let newTask = toDo.map((task) => {
-      if (task.id === t.id) {
-        return { ...task, isCompleted: !task.isCompleted };
+      if (task.id === updatedTask.id) {
+        return updatedTask;
       }
       return task;
     });
     setToDo(newTask);
-    let taskById = newTask.find((task) => task.id === t.id)!;
-    UpdateTaskOnDb(taskById);
+    UpdateTaskOnDb(updatedTask);
   };
 
   //Delete task
