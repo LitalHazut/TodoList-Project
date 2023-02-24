@@ -76,9 +76,9 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       }
       return task;
     });
-    UpdateTaskOnDb(t);
-    console.log(t.isCompleted)
     setToDo(newTask);
+    let taskById = newTask.find((task) => task.id === t.id)!;
+    UpdateTaskOnDb(taskById);
   };
 
   //Delete task

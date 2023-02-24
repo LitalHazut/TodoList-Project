@@ -32,7 +32,7 @@ const ToDo: React.FC<{
                   <div className='iconWrap'>
                     <span
                       title='Completed / Not Completed'
-                      onClick={(e) => markDone(task)}
+                      onClick={() => markDone(task)}
                     >
                       <FontAwesomeIcon icon={faCircleCheck} />
                     </span>
