@@ -45,7 +45,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       });
   };
 
-  const UpdateTaskOnDb = (task: ITask) => {
+  const updateTaskOnDb = (task: ITask) => {
     axios
       .put(`/api/put/${task.id}`, {
         name: task.name,
@@ -80,7 +80,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       return task;
     });
     setToDo(newTask);
-    UpdateTaskOnDb(updatedTask);
+    updateTaskOnDb(updatedTask);
   };
 
   //Delete task
@@ -119,7 +119,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       }
     });
     setToDo(updatedTasks);
-    UpdateTaskOnDb(task);
+    updateTaskOnDb(task);
     setUpdateData(null);
   };
 
