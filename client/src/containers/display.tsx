@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { TodoContextType, ITask } from '../types';
 import { TodoContext } from '../context/todoContext';
-import TaskList from '../Components/taskList';
-import AddTaskForm from '../Components/AddTaskForm';
-import UpdateForm from '../Components/UpdateForm';
+import TaskList from '../components/taskList';
+import AddTaskForm from '../components/addTaskForm';
+import UpdateForm from '../components/updateForm';
 const Display = () => {
   const {
     toDo,

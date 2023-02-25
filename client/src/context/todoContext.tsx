@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { TodoContextType, ITask } from '../types';
 import axios from 'axios';
+
 export const TodoContext = React.createContext<TodoContextType | null>(null);
 
 interface TodoContextProviderProps {
@@ -68,18 +69,6 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       setNewTask('');
     }
   };
-
-  // const markDone = (t: ITask) => {
-  //   let newTask = toDo.map((task) => {
-  //     if (task.id === t.id) {
-  //       return { ...task, isCompleted: !task.isCompleted };
-  //     }
-  //     return task;
-  //   });
-  //   setToDo(newTask);
-  //   let taskById = newTask.find((task) => task.id === t.id)!;
-  //   UpdateTaskOnDb(taskById);
-  // };
 
   const markDone = (t: ITask) => {
     const updatedTask = { ...t };
