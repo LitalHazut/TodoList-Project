@@ -1,92 +1,65 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { TodoContextType, ITask } from '../types';
 import axios from 'axios';
+import {
+  createTask,
+  deleteTaskFromDb,
+  fetchTasks,
+  updateTaskOnDb,
+} from '../tasks-service';
 
-export const TodoContext = React.createContext<TodoContextType | null>(null);
+export const TodoContext = React.createContext<TodoContextType>(
+  {} as TodoContextType
+);
 
 interface TodoContextProviderProps {
   children: React.ReactNode;
 }
+
+export const useTodosContext = () =>
+  React.useContext(TodoContext) as TodoContextType;
+
 export const TodoContextProvider = (props: TodoContextProviderProps) => {
-  const [newTask, setNewTask] = React.useState('');
   const [updateData, setUpdateData] = React.useState<ITask | null>(null);
-  const [toDo, setToDo] = useState<ITask[]>([]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
 
   useEffect(() => {
-    axios
-      .get('/api/get')
+    fetchTasks()
       .then((data) => {
-        setToDo(data.data.tasks);
+        setTasks(data.data.tasks);
       })
       .catch((e) => {
         return e;
       });
   }, []);
 
-  const createTask = (task: ITask) => {
-    axios
-      .post('/api/post', task)
-      .then((response) => {
-        console.log('Task created:', response.data);
-      })
-      .catch((error) => {
-        console.error('Error created task:', error);
+  const addTask: TodoContextType['addTask'] = (newTask: string) => {
+    let id = tasks.length + 1;
+    let newEntry = { id, name: newTask, isCompleted: false };
+    createTask(newEntry)
+      .then(() => setTasks([...tasks, newEntry]))
+      .catch((e) => {
+        alert('oh no i failed!!');
       });
-  };
-
-  const deleteTaskFromDb = (id: number) => {
-    axios
-      .delete(`/api/delete/${id}`)
-      .then((response) => {
-        console.log('Task deleted:', response.data);
-      })
-      .catch((error) => {
-        console.error('Error deleted task:', error);
-      });
-  };
-
-  const updateTaskOnDb = (task: ITask) => {
-    axios
-      .put(`/api/put/${task.id}`, {
-        name: task.name,
-        isCompleted: task.isCompleted,
-      })
-      .then((response) => {
-        console.log('Task updated:', response.data.tasks);
-      })
-      .catch((error) => {
-        console.error('Error updated task:', error);
-      });
-  };
-
-  //Add task
-  const addTask = () => {
-    if (newTask) {
-      let num = toDo.length + 1;
-      let newEntry = { id: num, name: newTask, isCompleted: false };
-      setToDo([...toDo, newEntry]);
-      createTask(newEntry);
-      setNewTask('');
-    }
   };
 
   const markDone = (t: ITask) => {
     const updatedTask = { ...t };
     updatedTask.isCompleted = !updatedTask.isCompleted;
-    let newTask = toDo.map((task) => {
+    let newTask = tasks.map((task) => {
       if (task.id === updatedTask.id) {
         return updatedTask;
       }
       return task;
     });
-    setToDo(newTask);
+    setTasks(newTask);
     updateTaskOnDb(updatedTask);
   };
 
   //Delete task
   const deleteTask = (id: number) => {
-    let newTasks = toDo.filter((task) => task.id !== id);
-    setToDo(newTasks);
+    let newTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
     deleteTaskFromDb(id);
   };
 
@@ -107,7 +80,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
   };
 
   const updateTask = (task: ITask) => {
-    const updatedTasks = toDo.map((task) => {
+    const updatedTasks = tasks.map((task) => {
       if (task.id === updateData?.id) {
         return {
           ...task,
@@ -118,7 +91,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
         return task;
       }
     });
-    setToDo(updatedTasks);
+    setTasks(updatedTasks);
     updateTaskOnDb(task);
     setUpdateData(null);
   };
@@ -126,14 +99,12 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
   return (
     <TodoContext.Provider
       value={{
-        toDo,
+        tasks,
         markDone,
         deleteTask,
         setUpdateData,
         changeTask,
         addTask,
-        newTask,
-        setNewTask,
         updateData,
         updateTask,
         cancelUpdate,

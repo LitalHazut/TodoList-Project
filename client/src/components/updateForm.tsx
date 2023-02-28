@@ -1,38 +1,28 @@
 import React from 'react';
-import { ITask } from '../types';
+import { useTodosContext } from '../context/todoContext';
 
-type Props = {
-  updateData: ITask;
-  changeTask: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  updateTask: (task: ITask) => void;
-  cancelUpdate: (s: string) => void;
-};
-
-const UpdateForm: React.FC<Props> = ({
-  updateData,
-  changeTask,
-  updateTask,
-  cancelUpdate,
-}) => {
+const UpdateForm: React.FC<{}> = () => {
+  const { updateData, changeTask, updateTask, cancelUpdate } =
+    useTodosContext();
   return (
     <>
       <div className='row'>
         <div className='col'>
           <input
-            value={updateData && updateData.name}
+            value={updateData! && updateData.name}
             onChange={(e) => changeTask(e)}
             className='form-control from-control-lg'
           />
         </div>
         <div className='col-auto'>
           <button
-            onClick={() => updateTask(updateData)}
+            onClick={() => updateTask(updateData!)}
             className='btn btn-lg btn-success mr-20 '
           >
             Update
           </button>
           <button
-            onClick={(e) => cancelUpdate(updateData && updateData.name)}
+            onClick={(e) => cancelUpdate(updateData! && updateData.name)}
             className='btn btn-lg btn-warning'
           >
             Cancel
