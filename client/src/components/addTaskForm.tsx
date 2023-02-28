@@ -12,7 +12,6 @@ type Props = {
 const AddTaskForm: React.FC<Props> = ({ addTask, newTask, setNewTask }) => {
   return (
     <>
-      {/* Add Task */}
       <div className='row'>
         <div className='col'>
           <input
