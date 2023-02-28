@@ -1,41 +1,47 @@
-import axios, { Axios } from 'axios';
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { ITask, TodoContextType } from '../types';
+import { useTodosContext } from '../context/todoContext';
 
-type Props = {
-  addTask: (t: Omit<ITask, 'id'>) => void;
-  newTask: string;
-  setNewTask: (s: string) => void;
-};
+const AddTaskForm: React.FC<{}> = () => {
+  const [newTask, setNewTask] = React.useState('');
 
-const AddTaskForm: React.FC<Props> = ({ addTask, newTask, setNewTask }) => {
   return (
     <>
       <div className='row'>
         <div className='col'>
-          <input
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-            className='form-control from-control-lg'
-          />
+          <NewTaskInput newTask={newTask} setNewTask={setNewTask} />
         </div>
         <div className='col-auto'>
-          <button
-            onClick={(e) =>
-              addTask({
-                name: newTask,
-                isCompleted: false,
-              })
-            }
-            className='btn btn-lg btn-success'
-          >
-            Add Task
-          </button>
+          <SubmitTask newTask={newTask} />
         </div>
       </div>
       <br />
     </>
+  );
+};
+
+const NewTaskInput: React.FC<{
+  newTask: string;
+  setNewTask: (newTask: string) => void;
+}> = ({ newTask, setNewTask }) => (
+  <input
+    value={newTask}
+    onChange={(e) => setNewTask(e.target.value)}
+    className='form-control from-control-lg'
+  />
+);
+
+const SubmitTask: React.FC<{
+  newTask: string;
+}> = ({ newTask }) => {
+  const { addTask } = useTodosContext();
+
+  return (
+    <button
+      onClick={(e) => addTask(newTask)}
+      className='btn btn-lg btn-success'
+    >
+      Add Task
+    </button>
   );
 };
 

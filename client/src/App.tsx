@@ -5,14 +5,13 @@ import Display from './containers/display';
 import './App.css';
 import { TodoContextProvider } from './context/todoContext';
 import { ITask } from './types';
+import { AppTitle } from './components/appTitle/appTitle';
 
 function App() {
   return (
     <TodoContextProvider>
       <div className='container App'>
-        <br></br>
-        <h2>To Do List App</h2>
-        <br></br>
+        <AppTitle />
         <Display />
       </div>
     </TodoContextProvider>

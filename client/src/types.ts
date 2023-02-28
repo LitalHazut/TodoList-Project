@@ -4,16 +4,14 @@ export interface ITask {
   isCompleted: boolean;
 }
 export type TodoContextType = {
-  toDo: ITask[];
+  tasks: ITask[];
   //TaskList
   markDone: (task: ITask) => void;
   deleteTask: (id: number) => void;
   setUpdateData: (t: ITask) => void;
 
   //AddTaskForm
-  addTask: (t: Omit<ITask, 'id'>) => void;
-  newTask: string;
-  setNewTask: (s: string) => void;
+  addTask: (taskName: string) => void;
 
   // UpdateForm
   updateData: ITask | null;

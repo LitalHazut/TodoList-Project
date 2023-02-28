@@ -4,40 +4,23 @@ import { TodoContext } from '../context/todoContext';
 import TaskList from '../components/taskList';
 import AddTaskForm from '../components/addTaskForm';
 import UpdateForm from '../components/updateForm';
+
 const Display = () => {
   const {
-    toDo,
+    tasks,
     markDone,
     deleteTask,
     setUpdateData,
     addTask,
-    newTask,
-    setNewTask,
     updateData,
-    changeTask,
-    updateTask,
-    cancelUpdate,
-  } = React.useContext(TodoContext) as TodoContextType;
+  }: TodoContextType = React.useContext(TodoContext)!;
   return (
     <>
-      {updateData && updateData.name ? (
-        <UpdateForm
-          updateData={updateData}
-          changeTask={changeTask}
-          updateTask={updateTask}
-          cancelUpdate={cancelUpdate}
-        />
-      ) : (
-        <AddTaskForm
-          addTask={addTask}
-          newTask={newTask}
-          setNewTask={setNewTask}
-        />
-      )}
+      {updateData && updateData.name ? <UpdateForm /> : <AddTaskForm />}
 
-      {toDo && toDo.length ? '' : 'No Tasks ...'}
+      {tasks && tasks.length ? '' : 'No Tasks ...'}
       <TaskList
-        toDo={toDo}
+        toDo={tasks}
         markDone={markDone}
         deleteTask={deleteTask}
         setUpdateData={setUpdateData}
