@@ -10,14 +10,14 @@ import {
 import { TodoContext } from '../context/todoContext';
 
 type Props = {
-  toDo: ITask[];
+  toDos: ITask[];
   markDone: (task: ITask) => void;
   deleteTask: (id: number) => void;
   setUpdateData: (t: ITask) => void;
 };
 
 const TaskList: React.FC<Props> = ({
-  toDo,
+  toDos: toDo,
   markDone,
   deleteTask,
   setUpdateData,

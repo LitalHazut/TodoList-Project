@@ -1,7 +1,5 @@
-import axios, { Axios } from 'axios';
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { ITask, TodoContextType } from '../types';
+import { ITask } from '../types';
 
 type Props = {
   addTask: (t: Omit<ITask, 'id'>) => void;

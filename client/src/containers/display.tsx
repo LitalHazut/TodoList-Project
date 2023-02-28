@@ -4,6 +4,7 @@ import { TodoContext } from '../context/todoContext';
 import TaskList from '../components/taskList';
 import AddTaskForm from '../components/addTaskForm';
 import UpdateForm from '../components/updateForm';
+
 const Display = () => {
   const {
     toDo,
