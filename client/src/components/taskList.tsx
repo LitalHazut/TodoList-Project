@@ -1,4 +1,3 @@
-import { ITask } from '../types';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -6,24 +5,16 @@ import {
   faPen,
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
+import { useTodosContext } from '../context/todoContext';
 
-type Props = {
-  toDo: ITask[];
-  markDone: (task: ITask) => void;
-  deleteTask: (id: number) => void;
-  setUpdateData: (t: ITask) => void;
-};
 
-const TaskList: React.FC<Props> = ({
-  toDo,
-  markDone,
-  deleteTask,
-  setUpdateData,
-}) => {
+const TaskList: React.FC<{}> = () => {
+  const { tasks, markDone, deleteTask, setUpdateData } =
+  useTodosContext();
   return (
     <>
-      {toDo &&
-        toDo
+      {tasks &&
+        tasks
           .sort((a, b) => (a.id > b.id ? 1 : -1))
           .map((task, index) => {
             <h4 key={index}></h4>;

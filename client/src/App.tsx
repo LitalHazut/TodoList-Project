@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Display from './containers/display';
+import Display from './containers/mainContainer';
 import './App.css';
 import { TodoContextProvider } from './context/todoContext';
 import { AppTitle } from './components/appTitle/appTitle';
