@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TodoContextType, ITask } from '../types';
+import { TodoContextType } from '../types';
 import { TodoContext } from '../context/todoContext';
 import TaskList from '../components/taskList';
 import AddTaskForm from '../components/addTaskForm';

@@ -1,6 +1,5 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TodoContextType, ITask } from '../types';
-import axios from 'axios';
 import {
   createTask,
   deleteTaskFromDb,

@@ -1,13 +1,11 @@
-import { TodoContextProvider } from '../context/todoContext';
-import { ITask, TodoContextType } from '../types';
-import React, { useContext, useState } from 'react';
+import { ITask } from '../types';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleCheck,
   faPen,
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
-import { TodoContext } from '../context/todoContext';
 
 type Props = {
   toDo: ITask[];
