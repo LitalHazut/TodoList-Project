@@ -51,23 +51,27 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       }
       return task;
     });
-    setTasks(newTask);
-    updateTaskOnDb(updatedTask);
+    updateTaskOnDb(updatedTask)
+    .then(() => setTasks(newTask))
+    .catch((e) => {
+        alert('oh no i failed!!');
+      });
+    
   };
 
-  //Delete task
   const deleteTask = (id: number) => {
     let newTasks = tasks.filter((task) => task.id !== id);
-    setTasks(newTasks);
-    deleteTaskFromDb(id);
+    deleteTaskFromDb(id)
+    .then(() => setTasks(newTasks))
+    .catch((e) => {
+        alert('oh no i failed!!');
+      });
   };
 
-  // Cancel update
   const cancelUpdate = () => {
     setUpdateData(null);
   };
 
-  // Change task for update
   const changeTask = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newId = updateData?.id ?? 0;
     const task: ITask = {
@@ -90,8 +94,11 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
         return task;
       }
     });
-    setTasks(updatedTasks);
-    updateTaskOnDb(task);
+    updateTaskOnDb(task)
+    .then(() =>setTasks(updatedTasks))
+    .catch((e) => {
+        alert('oh no i failed!!');
+      });
     setUpdateData(null);
   };
 
