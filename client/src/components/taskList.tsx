@@ -10,7 +10,7 @@ import { ITask } from '../types';
 
 
 const TaskList: React.FC<{}> = () => {
-  const { tasks,setUpdateData } =
+  const { tasks } =
   useTodosContext();
   return (
     <>
@@ -25,7 +25,7 @@ const TaskList: React.FC<{}> = () => {
                   <TaskView task={task} index={index}/>
                   <div className='iconWrap'>
                    <MarkTask task={task} />
-                   <EditTask task={task} setUpdateData={setUpdateData}/>
+                   <EditTask task={task}/>
                    <DeleteTask task={task} />
                   </div>
                 </div>
@@ -63,9 +63,9 @@ onClick={() => markDone(task)}>
 };
 
 const EditTask: React.FC<{
-  setUpdateData: (t: ITask) => void;
   task: ITask;
-}>=({setUpdateData,task})=>{
+}>=({task})=>{
+const { setUpdateData } = useTodosContext();
 return(
   <>
   {task.isCompleted ? null : (
