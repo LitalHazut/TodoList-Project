@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TodoContextType, ITask } from '../types';
 import {
-  createTask,
   deleteTaskFromDb,
   fetchTasks,
   updateTaskOnDb,
@@ -32,15 +31,6 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       });
   }, []);
 
-  const addTask: TodoContextType['addTask'] = (newTask: string) => {
-    let id = tasks.length + 1;
-    let newEntry = { id, name: newTask, isCompleted: false };
-    createTask(newEntry)
-      .then(() => setTasks([...tasks, newEntry]))
-      .catch((e) => {
-        alert('oh no i failed!!');
-      });
-  };
 
   const markDone = (t: ITask) => {
     const updatedTask = { ...t };
@@ -106,11 +96,12 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
     <TodoContext.Provider
       value={{
         tasks,
+        setTasks,
         markDone,
         deleteTask,
         setUpdateData,
         changeTask,
-        addTask,
+        // addTask,
         updateData,
         updateTask,
         cancelUpdate,

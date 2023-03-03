@@ -5,13 +5,14 @@ export interface ITask {
 }
 export type TodoContextType = {
   tasks: ITask[];
+  setTasks:(t: ITask[]) =>void
   //TaskList
   markDone: (task: ITask) => void;
   deleteTask: (id: number) => void;
   setUpdateData: (t: ITask) => void;
 
   //AddTaskForm
-  addTask: (taskName: string) => void;
+  // addTask: (taskName: string) => void;
 
   // UpdateForm
   updateData: ITask | null;

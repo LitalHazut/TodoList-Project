@@ -3,7 +3,7 @@ import TaskList from '../components/taskList';
 import AddTaskForm from '../components/addTaskForm';
 import UpdateForm from '../components/updateForm';
 
-const Display = () => {
+const Main = () => {
   const { tasks,updateData} = useTodosContext();
   return (
     <>
@@ -13,4 +13,4 @@ const Display = () => {
     </>
   );
 };
-export default Display;
+export default Main;
