@@ -101,7 +101,6 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
         deleteTask,
         setUpdateData,
         changeTask,
-        // addTask,
         updateData,
         updateTask,
         cancelUpdate,
