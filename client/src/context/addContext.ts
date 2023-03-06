@@ -1,10 +1,9 @@
 import { useTodosContext } from '../context/todoContext';
-import {createTask} from '../tasks-service';
+import { createTask } from '../tasks-service';
 
-export const useAddTask = (setNewTask: (newTask: string) => void) =>{
-    const { tasks,setTasks } = useTodosContext();
-    return (newTask:string
-    ) => {
+export const useAddTask = (setNewTask: (newTask: string) => void) => {
+  const { tasks, setTasks } = useTodosContext();
+  return (newTask: string) => {
     let id = tasks.length + 1;
     let newEntry = { id, name: newTask, isCompleted: false };
     createTask(newEntry)
@@ -12,7 +11,6 @@ export const useAddTask = (setNewTask: (newTask: string) => void) =>{
       .catch((e) => {
         alert('oh no i failed!!');
       });
-      setNewTask('');
-    }
-
+    setNewTask('');
   };
+};

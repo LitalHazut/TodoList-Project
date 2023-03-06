@@ -1,6 +1,5 @@
 import TasksService from './tasksService';
 import express from 'express';
-import dbConnection from './dbConnection';
 import cors from 'cors';
 
 const app = express();

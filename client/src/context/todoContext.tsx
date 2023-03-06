@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TodoContextType, ITask } from '../types';
-import {
-  deleteTaskFromDb,
-  fetchTasks,
-  updateTaskOnDb,
-} from '../tasks-service';
+import { deleteTaskFromDb, fetchTasks, updateTaskOnDb } from '../tasks-service';
 
 export const TodoContext = React.createContext<TodoContextType>(
   {} as TodoContextType
@@ -31,7 +27,6 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       });
   }, []);
 
-
   const markDone = (t: ITask) => {
     const updatedTask = { ...t };
     updatedTask.isCompleted = !updatedTask.isCompleted;
@@ -42,18 +37,17 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       return task;
     });
     updateTaskOnDb(updatedTask)
-    .then(() => setTasks(newTask))
-    .catch((e) => {
+      .then(() => setTasks(newTask))
+      .catch((e) => {
         alert('oh no i failed!!');
       });
-    
   };
 
   const deleteTask = (id: number) => {
     let newTasks = tasks.filter((task) => task.id !== id);
     deleteTaskFromDb(id)
-    .then(() => setTasks(newTasks))
-    .catch((e) => {
+      .then(() => setTasks(newTasks))
+      .catch((e) => {
         alert('oh no i failed!!');
       });
   };
@@ -85,8 +79,8 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
       }
     });
     updateTaskOnDb(task)
-    .then(() =>setTasks(updatedTasks))
-    .catch((e) => {
+      .then(() => setTasks(updatedTasks))
+      .catch((e) => {
         alert('oh no i failed!!');
       });
     setUpdateData(null);

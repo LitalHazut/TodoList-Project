@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAddTask} from '../context/addContext';
+import { useAddTask } from '../context/addContext';
 const AddTaskForm: React.FC<{}> = () => {
   const [newTask, setNewTask] = React.useState('');
 
@@ -10,7 +10,7 @@ const AddTaskForm: React.FC<{}> = () => {
           <NewTaskInput newTask={newTask} setNewTask={setNewTask} />
         </div>
         <div className='col-auto'>
-          <SubmitTask newTask={newTask} setNewTask={setNewTask}/>
+          <SubmitTask newTask={newTask} setNewTask={setNewTask} />
         </div>
       </div>
       <br />
@@ -32,8 +32,8 @@ const NewTaskInput: React.FC<{
 const SubmitTask: React.FC<{
   newTask: string;
   setNewTask: (newTask: string) => void;
-}> = ({ newTask,setNewTask }) => {
-   const addTask  = useAddTask(setNewTask);
+}> = ({ newTask, setNewTask }) => {
+  const addTask = useAddTask(setNewTask);
 
   return (
     <button
@@ -42,7 +42,6 @@ const SubmitTask: React.FC<{
     >
       Add Task
     </button>
-  
   );
 };
 

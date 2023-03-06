@@ -5,10 +5,10 @@ const UpdateForm: React.FC<{}> = () => {
   return (
     <>
       <div className='row'>
-        <ChangeTask/>
+        <ChangeTask />
         <div className='col-auto'>
-        <UpdateTask/>
-        <CancelUpdate />
+          <UpdateTask />
+          <CancelUpdate />
         </div>
       </div>
       <br />
@@ -16,54 +16,41 @@ const UpdateForm: React.FC<{}> = () => {
   );
 };
 
-const ChangeTask: React.FC<{
-  }>=({}) =>{
-    const { changeTask , updateData} = useTodosContext();
-    return(
-      <div className='col'>
+const ChangeTask: React.FC<{}> = ({}) => {
+  const { changeTask, updateData } = useTodosContext();
+  return (
+    <div className='col'>
       <input
-      value={updateData! && updateData.name}
-      onChange={(e) => changeTask(e)}
-      className='form-control from-control-lg'
-    />
+        value={updateData! && updateData.name}
+        onChange={(e) => changeTask(e)}
+        className='form-control from-control-lg'
+      />
     </div>
-);
+  );
 };
 
-
-const UpdateTask: React.FC<{
-  }>=({}) =>{
-    const { updateTask ,updateData} = useTodosContext();
-    return(
-      <button
+const UpdateTask: React.FC<{}> = ({}) => {
+  const { updateTask, updateData } = useTodosContext();
+  return (
+    <button
       onClick={() => updateTask(updateData!)}
       className='btn btn-lg btn-success mr-20 '
     >
       Update
     </button>
-    
-);
+  );
 };
 
-
-const CancelUpdate: React.FC<{
-  }>=({}) =>{
-    const { updateTask ,updateData} = useTodosContext();
-    return(
-      <button
+const CancelUpdate: React.FC<{}> = ({}) => {
+  const { updateTask, updateData } = useTodosContext();
+  return (
+    <button
       onClick={() => updateTask(updateData!)}
       className='btn btn-lg btn-success mr-20 '
     >
       Update
     </button>
-    
-);
+  );
 };
-
-
-
-
-
-
 
 export default UpdateForm;

@@ -4,12 +4,12 @@ import AddTaskForm from '../components/addTaskForm';
 import UpdateForm from '../components/updateForm';
 
 const Main = () => {
-  const { tasks,updateData} = useTodosContext();
+  const { tasks, updateData } = useTodosContext();
   return (
     <>
       {updateData && updateData.name ? <UpdateForm /> : <AddTaskForm />}
       {tasks && tasks.length ? '' : 'No Tasks ...'}
-      <TaskList/>
+      <TaskList />
     </>
   );
 };
