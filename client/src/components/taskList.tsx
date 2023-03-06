@@ -16,7 +16,7 @@ const TaskList: React.FC<{}> = () => {
         tasks
           .sort((a, b) => (a.id > b.id ? 1 : -1))
           .map((task, index) => {
-            <h4 key={index}></h4>;
+            <h4 key={task.id}></h4>;
             return (
               <React.Fragment key={task.id}>
                 <div className='col taskBg'>
