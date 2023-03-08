@@ -69,3 +69,19 @@ body {
 .mr-20 {
   margin-right: 20px;
 }
+
+@media screen and (min-width: 1400px) {
+  .container.App {
+    width: 1370px;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .container.App {
+    width: 1570px;
+  }
+}
+@media screen and (min-width: 1900px) {
+  .container.App {
+    width: 1870px;
+  }
+}

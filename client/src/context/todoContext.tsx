@@ -17,7 +17,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
   const [updateData, setUpdateData] = React.useState<ITask | null>(null);
   const [tasks, setTasks] = useState<ITask[]>([]);
 
-  useEffect(() => {
+   useEffect(() => {
     fetchTasks()
       .then((data) => {
         setTasks(data.data.tasks);
@@ -47,7 +47,7 @@ export const TodoContextProvider = (props: TodoContextProviderProps) => {
     let newTasks = tasks.filter((task) => task.id !== id);
     deleteTaskFromDb(id)
       .then(() => setTasks(newTasks))
-      .catch((e) => {
+      .catch(() => {
         alert('oh no i failed!!');
       });
   };

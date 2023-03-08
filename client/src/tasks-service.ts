@@ -3,27 +3,25 @@ import { ITask } from './types';
 
 export const fetchTasks = () => axios.get('/api/get');
 
-export const createTask = (task: ITask) => axios.post('/api/post', task);
+export async function createTask(task: ITask) {
+  const response = await axios.post('/api/post', task);
+}
 
-export const deleteTaskFromDb = (id: number) =>
-  axios
-    .delete(`/api/delete/${id}`)
-    .then((response) => {
-      console.log('Task deleted:', response.data);
-    })
-    .catch((error) => {
-      console.error('Error deleted task:', error);
-    });
+export async function deleteTaskFromDb(id: number) {
+  try {
+    const response = await axios.delete(`/api/delete/${id}`);
+  } catch (error) {
+    console.error('Error deleted task:', error);
+  }
+}
 
-export const updateTaskOnDb = (task: ITask) =>
-  axios
-    .put(`/api/put/${task.id}`, {
+export async function updateTaskOnDb(task: ITask) {
+  try {
+    const response = axios.put(`/api/put/${task.id}`, {
       name: task.name,
       isCompleted: task.isCompleted,
-    })
-    .then((response) => {
-      console.log('Task updated:', response.data.tasks);
-    })
-    .catch((error) => {
-      console.error('Error updated task:', error);
     });
+  } catch (error) {
+    console.error('Error updated task:', error);
+  }
+}
