@@ -1,12 +1,25 @@
 import TasksService from './tasksService';
 import express from 'express';
 import cors from 'cors';
+import * as path from 'path';
 
 const app = express();
 const PORT = 3001;
 
 app.use(cors());
 app.use(express.json());
+
+
+if(process.env.Node_ENV === 'production'){
+  app.use(express.static(path.resolve(__dirname,'public')))
+} else{
+  const corOption={
+    origin: ['*'],
+    credentials: true
+  }
+  app.use(cors(corOption))
+}
+
 
 const taskService = new TasksService();
 
