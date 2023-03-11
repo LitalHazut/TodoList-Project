@@ -22,7 +22,7 @@ if (process.env.NONE_ENV === 'production') {
 const taskService = new TasksService();
 
 // Route to get all posts
-app.get('/', async (req, res) => {
+app.get('/api/get', async (req, res) => {
   res.send({ tasks: await taskService.getAllTasks() });
 });
 
