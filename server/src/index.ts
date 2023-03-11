@@ -9,7 +9,7 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
-if (process.env.Node_ENV === 'production') {
+if (process.env.NONE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, 'public')));
 } else {
   const corsOptions = {
